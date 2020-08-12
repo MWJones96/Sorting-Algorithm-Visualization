@@ -3,7 +3,6 @@ var array = null;
 function setup() {
     createCanvas(400, 400);
     array = shuffle([...Array(width).keys()]);
-    bubbleSort(array);
 }
 
 function draw() {
@@ -13,6 +12,11 @@ function draw() {
         line(i, height, i, height - array[i]);
     }
 
+    if (!bubbleDone(array)) {
+        for (var step = 0; step < 10; step++) {
+            bubbleStep(array);
+        }
+    }
 }
 
 function shuffle(array) {
@@ -34,6 +38,7 @@ function shuffle(array) {
     return array;
 }
 
+/*
 function bubbleSort(arr) {
     for (var i = 0; i < arr.length; i++) {
         var swapped = false;
@@ -49,6 +54,37 @@ function bubbleSort(arr) {
             break;
         }
     }
+}*/
+
+var i = 0;
+var j = 0;
+var swapped = false;
+var done = false;
+
+function bubbleStep(arr) {
+    if (j == 0) {
+        swapped = false;
+    }
+
+    if (arr[j] > arr[j+1]) {
+        swap(arr, j, j + 1);
+        swapped = true;
+    }
+
+    if (i == arr.length || (j == arr.length && !swapped)) {
+        done = true;
+    }
+
+    if (j == arr.length) {
+        i += 1;
+        j = 0;
+    }
+
+    j += 1;
+}
+
+function bubbleDone(arr) {
+    return done;
 }
 
 function swap(arr, a, b) {
