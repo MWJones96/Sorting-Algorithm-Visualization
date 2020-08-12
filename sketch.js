@@ -1,27 +1,19 @@
 var array = null;
 
 function setup() {
-    createCanvas(512, 512);
+    createCanvas(1024, 1024);
     array = shuffle([...Array(width).keys()]);
 }
 
 function draw() {
     background(0);
     for (var i = 0; i < array.length; i++) {
-        var lsbits = array[i] & 0b111
-        var msbits = (array[i] & 0b111000) >> 3;
-        var hsbits = (array[i] & 0b111000000) >> 6;
-
-        var l = map(lsbits, 0, 7, 0, 255);
-        var m = map(msbits, 0, 7, 0, 255);
-        var h = map(hsbits, 0, 7, 0, 255);
-
-        stroke(h, m, l);
+        stroke(255);
         line(i, height, i, height - array[i]);
     }
 
     if (!bubbleDone(array)) {
-        for (var step = 0; step < 100; step++) {
+        for (var step = 0; step < array.length / 2; step++) {
             bubbleStep(array);
         }
     }
