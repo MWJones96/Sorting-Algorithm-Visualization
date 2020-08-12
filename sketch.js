@@ -1,7 +1,7 @@
 var array = null;
 
 function setup() {
-    createCanvas(400, 400);
+    createCanvas(256, 256);
     array = shuffle([...Array(width).keys()]);
 }
 
@@ -13,7 +13,7 @@ function draw() {
     }
 
     if (!bubbleDone(array)) {
-        for (var step = 0; step < 10; step++) {
+        for (var step = 0; step < 100; step++) {
             bubbleStep(array);
         }
     }
@@ -78,9 +78,9 @@ function bubbleStep(arr) {
     if (j == arr.length) {
         i += 1;
         j = 0;
+    } else {
+        j += 1;
     }
-
-    j += 1;
 }
 
 function bubbleDone(arr) {
