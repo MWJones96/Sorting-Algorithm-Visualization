@@ -1,94 +1,38 @@
-var array = null;
+var sortingAlgorithm = null;
+var size = 512;
 
 function setup() {
-    createCanvas(1024, 1024);
-    array = shuffle([...Array(width).keys()]);
+    createCanvas(size, size);
+
+    sortingAlgorithm = new BubbleSortingAlgorithm(size);
 }
 
 function draw() {
     background(0);
-    for (var i = 0; i < array.length; i++) {
+    var array = sortingAlgorithm.getArray();
+
+    for (var i = 0; i < size; i++) {
         stroke(255);
+        strokeWeight(1);
         line(i, height, i, height - array[i]);
     }
 
-    if (!bubbleDone(array)) {
-        for (var step = 0; step < array.length / 2; step++) {
-            bubbleStep(array);
+    var key_indices = sortingAlgorithm.getKeyIndices();
+
+    if (!sortingAlgorithm.isDone()) {
+        for (var i = 0; i < key_indices.length; i++) {
+            var indice = key_indices[i];
+            stroke(0, 255, 0);
+            strokeWeight(1);
+            line(indice, height, indice, height - array[indice]);
         }
     }
-}
 
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-  
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-  
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-  
-      // And swap it with the current element.
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-  
-    return array;
-}
-
-/*
-function bubbleSort(arr) {
-    for (var i = 0; i < arr.length; i++) {
-        var swapped = false;
-
-        for (var j = 0; j < arr.length; j++) {
-            if (arr[j] > arr[j+1]) {
-                swap(arr, j, j + 1);
-                swapped = true;
-            }
-        }
-
-        if (!swapped) {
-            break;
+    var num_steps = size / 2;
+    
+    if (!sortingAlgorithm.isDone()) {
+        for (var i = 0; i < num_steps; i++) {
+            sortingAlgorithm.sortStep();
         }
     }
-}*/
-
-var i = 0;
-var j = 0;
-var swapped = false;
-var done = false;
-
-function bubbleStep(arr) {
-    if (j == 0) {
-        swapped = false;
-    }
-
-    if (arr[j] > arr[j+1]) {
-        swap(arr, j, j + 1);
-        swapped = true;
-    }
-
-    if (i == arr.length || (j == arr.length && !swapped)) {
-        done = true;
-    }
-
-    if (j == arr.length) {
-        i += 1;
-        j = 0;
-    } else {
-        j += 1;
-    }
-}
-
-function bubbleDone(arr) {
-    return done;
-}
-
-function swap(arr, a, b) {
-    var temp = arr[a];
-    arr[a] = arr[b];
-    arr[b] = temp;
 }
