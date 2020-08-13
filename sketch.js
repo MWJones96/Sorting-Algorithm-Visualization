@@ -22,13 +22,13 @@ function draw() {
     if (!sortingAlgorithm.isDone()) {
         for (var i = 0; i < key_indices.length; i++) {
             var indice = key_indices[i];
-            stroke(0, 255, 0);
+            stroke(255, 0, 0);
             strokeWeight(1);
             line(indice, height, indice, height - array[indice]);
         }
     }
 
-    var num_steps = size / 2;
+    var num_steps = size / 4;
     
     if (!sortingAlgorithm.isDone()) {
         for (var i = 0; i < num_steps; i++) {
