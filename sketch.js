@@ -1,8 +1,8 @@
 var sortingAlgorithm = null;
 
 function setup() {
-    let width = 400;
-    let height = 300;
+    let width = 512;
+    let height = 376;
 
     createCanvas(width, height);
 
@@ -21,7 +21,7 @@ function draw() {
 
     drawArray(array);
     drawSpecialIndices(array, indices);
-    sortSteps(100);
+    sortSteps(array.length/2);
 }
 
 function drawArray(arr) {
