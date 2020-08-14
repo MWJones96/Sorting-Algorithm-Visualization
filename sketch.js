@@ -1,22 +1,38 @@
 var sortingAlgorithm = null;
-var size = 512;
 
 function setup() {
-    createCanvas(size, size);
+    let width = 400;
+    let height = 300;
 
-    sortingAlgorithm = new BubbleSortingAlgorithm(size);
+    createCanvas(width, height);
+
+    let array = [...Array(width)];
+    for(let i = 0; i < array.length; i++) {
+        array[i] = Math.floor(Math.random() * (height + 1));
+    }
+
+    sortingAlgorithm = new BubbleSortingAlgorithm(array);
 }
 
 function draw() {
     background(0);
     var array = sortingAlgorithm.getArray();
+    var indices = sortingAlgorithm.getKeyIndices();
 
-    for (var i = 0; i < size; i++) {
+    drawArray(array);
+    drawSpecialIndices(array, indices);
+    sortSteps(100);
+}
+
+function drawArray(arr) {
+    for (var i = 0; i < arr.length; i++) {
         stroke(255);
         strokeWeight(1);
-        line(i, height, i, height - array[i]);
+        line(i, height, i, height - arr[i]);
     }
+}
 
+function drawSpecialIndices(arr, indices) {
     var key_indices = sortingAlgorithm.getKeyIndices();
 
     if (!sortingAlgorithm.isDone()) {
@@ -24,12 +40,12 @@ function draw() {
             var indice = key_indices[i];
             stroke(255, 0, 0);
             strokeWeight(1);
-            line(indice, height, indice, height - array[indice]);
+            line(indice, height, indice, height - arr[indice]);
         }
     }
+}
 
-    var num_steps = size / 4;
-    
+function sortSteps(num_steps) {
     if (!sortingAlgorithm.isDone()) {
         for (var i = 0; i < num_steps; i++) {
             sortingAlgorithm.sortStep();

@@ -1,54 +1,32 @@
 class SortingAlgorithm {
-    constructor(size=256) {
-        this.arr = [...Array(width).keys()];
-        this.shuffle();
-    }
-
-    swap(a, b) {
-        var temp = this.arr[a];
-        this.arr[a] = this.arr[b];
-        this.arr[b] = temp;
-    }
-
-    shuffle() {
-        var currentIndex = this.arr.length;
-      
-        // While there remain elements to shuffle...
-        while (0 !== currentIndex) {
-      
-          // Pick a remaining element...
-          var randomIndex = Math.floor(Math.random() * currentIndex);
-          currentIndex -= 1;
-      
-          // And swap it with the current element.
-          var temporaryValue = this.arr[currentIndex];
-          this.arr[currentIndex] = this.arr[randomIndex];
-          this.arr[randomIndex] = temporaryValue;
-        }
+    constructor(arr) {
+        this.arr = arr;
+        this.start = 0;
+        this.end = arr.length - 1;
     }
 
     sortStep() {
-        throw 'Unimplemented exception'
+        throw 'Unimplemented exception';
     }
     isDone() {
-        throw 'Unimplemented exception'
+        throw 'Unimplemented exception';
     }
     getArray() {
-        throw 'Unimplemented exception'
+        throw 'Unimplemented exception';
     }
     getKeyIndices() {
-        throw 'Unimplemented exception'
+        throw 'Unimplemented exception';
     }
 };
 
 class BubbleSortingAlgorithm extends SortingAlgorithm {
-    i = 0;
-    j = 0;
+    i = this.start;
+    j = this.start;
     swapped = false;
     done = false;
 
-    constructor(size=256) {
-        super(size);
+    constructor(arr) {
+        super(arr);
     }
 
     sortStep() {
@@ -57,19 +35,19 @@ class BubbleSortingAlgorithm extends SortingAlgorithm {
         }
     
         if (this.arr[this.j] > this.arr[this.j+1]) {
-            this.swap(this.j, this.j + 1);
+            swap(this.arr, this.j, this.j + 1);
             this.swapped = true;
         }
     
-        if (this.i == this.arr.length || (this.j == this.arr.length && !this.swapped)) {
+        if (this.i == this.end + 1 || (this.j == this.end + 1 && !this.swapped)) {
             this.done = true;
         }
     
-        if (this.j == this.arr.length) {
-            this.i += 1;
-            this.j = 0;
+        if (this.j == this.end + 1) {
+            this.i++;
+            this.j = this.start;
         } else {
-            this.j += 1;
+            this.j++;
         }
     }
 
