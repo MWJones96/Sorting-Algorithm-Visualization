@@ -11,8 +11,9 @@ function setup() {
         array[i] = Math.floor(Math.random() * (height + 1));
     }
 
-    sortingAlgorithm = new MergeSortingAlgorithm(array);
+    sortingAlgorithm = new BubbleSortingAlgorithm(array);
     document.getElementById('algorithm-name').innerHTML = sortingAlgorithm.getSortAlgorithmName();
+    sortingAlgorithm.sort();
 }
 
 function draw() {
@@ -22,7 +23,6 @@ function draw() {
 
     drawArray(array);
     drawSpecialIndices(array, indices);
-    sortSteps(array.length/2);
 }
 
 function drawArray(arr) {
@@ -36,20 +36,10 @@ function drawArray(arr) {
 function drawSpecialIndices(arr, indices) {
     var key_indices = sortingAlgorithm.getKeyIndices();
 
-    if (!sortingAlgorithm.isDone()) {
-        for (var i = 0; i < key_indices.length; i++) {
-            var indice = key_indices[i];
-            stroke(255, 0, 0);
-            strokeWeight(1);
-            line(indice, height, indice, height - arr[indice]);
-        }
-    }
-}
-
-function sortSteps(num_steps) {
-    if (!sortingAlgorithm.isDone()) {
-        for (var i = 0; i < num_steps; i++) {
-            sortingAlgorithm.sortStep();
-        }
+    for (var i = 0; i < key_indices.length; i++) {
+        var indice = key_indices[i];
+        stroke(255, 0, 0);
+        strokeWeight(1);
+        line(indice, height, indice, height - arr[indice]);
     }
 }

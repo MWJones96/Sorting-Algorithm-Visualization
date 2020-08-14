@@ -1,14 +1,12 @@
 class SortingAlgorithm {
-    constructor(arr, start=-1, end=-1) {
+    constructor(arr, delay=1, start=-1, end=-1) {
         this.arr = arr;
+        this.delay = delay;
         this.start = (start == -1) ? 0 : start;
         this.end = (end == -1) ? arr.length - 1 : end;
     }
 
-    sortStep() {
-        throw 'Unimplemented exception';
-    }
-    isDone() {
+    async sort() {
         throw 'Unimplemented exception';
     }
     getArray() {
@@ -23,39 +21,32 @@ class SortingAlgorithm {
 };
 
 class BubbleSortingAlgorithm extends SortingAlgorithm {
-    i = this.start;
-    j = this.start;
-    swapped = false;
-    done = false;
+    i = -1;
+    j = -1;
 
     constructor(arr) {
         super(arr);
     }
 
-    sortStep() {
-        if (this.j == 0) {
-            this.swapped = false;
-        }
-    
-        if (this.arr[this.j] > this.arr[this.j+1]) {
-            swap(this.arr, this.j, this.j + 1);
-            this.swapped = true;
-        }
-    
-        if (this.i == this.end + 1 || (this.j == this.end + 1 && !this.swapped)) {
-            this.done = true;
-        }
-    
-        if (this.j == this.end + 1) {
-            this.i++;
-            this.j = this.start;
-        } else {
-            this.j++;
-        }
-    }
+    async sort() {
+        for (this.i = this.start; this.i <= this.end; this.i++) {
+            let swapped = false;
 
-    isDone() {
-        return this.done;
+            for (this.j = this.start; this.j <= this.end; this.j++) {
+                if (this.arr[this.j] > this.arr[this.j+1]) {
+                    swap(this.arr, this.j, this.j + 1);
+                    swapped = true;
+                }
+
+                if (this.j % 8 == 0) {
+                    await sleep(this.delay);
+                }
+            }
+
+            if (!swapped) {
+                break;
+            }
+        }
     }
 
     getArray() {
@@ -74,26 +65,10 @@ class BubbleSortingAlgorithm extends SortingAlgorithm {
 class MergeSortingAlgorithm extends SortingAlgorithm {
     constructor(arr, start=-1, end=-1) {
         super(arr, start, end);
-
-        let midIndex = start + ((end - start) / 2);
-        this.leftSide = new MergeSortingAlgorithm(arr, start, midIndex - 1);
-        this.rightSide = new MergeSortingAlgorithm(arr, midIndex, end);
-
-        this.leftPtr = 0;
-        this.rightPtr = midIndex;
-        this.insertIndex = 0;
     }
 
-    sortStep() {
-        if (!this.leftSide.isDone()) {
-            this.leftSide.sortStep();
-        } else if (!this.rightSide.isDone()) {
-            this.rightSide.sortStep();
-        }
-    }
+    async sort() {
 
-    isDone() {
-        return false;
     }
 
     getArray() {
