@@ -38,9 +38,7 @@ class BubbleSortingAlgorithm extends SortingAlgorithm {
                     swapped = true;
                 }
 
-                if (this.j % 8 == 0) {
-                    await sleep(this.delay);
-                }
+                await sleep(this.delay);
             }
 
             if (!swapped) {
