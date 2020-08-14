@@ -14,7 +14,7 @@ function setup() {
         array[i] = Math.floor(Math.random() * (maxValue + 1));
     }
 
-    textSize(16);
+    textSize(12);
     textAlign(CENTER, CENTER);
 
     sortingAlgorithm = new BubbleSortingAlgorithm(array);
