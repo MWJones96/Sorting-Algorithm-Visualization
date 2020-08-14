@@ -5,7 +5,7 @@ var maxValue = 32;
 
 function setup() {
     let width = numItems * itemWidth;
-    var height = maxValue * itemWidth + 35;
+    var height = maxValue * itemWidth + 25;
 
     createCanvas(width, height);
 
@@ -15,6 +15,7 @@ function setup() {
     }
 
     textSize(16);
+    textAlign(CENTER, CENTER);
 
     sortingAlgorithm = new BubbleSortingAlgorithm(array);
     document.getElementById('algorithm-name').innerHTML = sortingAlgorithm.getSortAlgorithmName();
@@ -35,7 +36,7 @@ function drawArray(arr) {
     for (var i = 0; i < arr.length; i++) {
         fill(255);
         rect(i*itemWidth, height - (arr[i] * itemWidth), itemWidth, arr[i] * itemWidth);
-        text(arr[i], i * itemWidth, height - (arr[i] * itemWidth) - 5);
+        text(arr[i], (i * itemWidth) + itemWidth / 2, height - (arr[i] * itemWidth) - 10);
     }
 }
 
