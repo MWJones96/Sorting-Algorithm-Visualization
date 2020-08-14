@@ -1,8 +1,8 @@
 class SortingAlgorithm {
-    constructor(arr) {
+    constructor(arr, start=-1, end=-1) {
         this.arr = arr;
-        this.start = 0;
-        this.end = arr.length - 1;
+        this.start = (start == -1) ? 0 : start;
+        this.end = (end == -1) ? arr.length - 1 : end;
     }
 
     sortStep() {
@@ -15,6 +15,9 @@ class SortingAlgorithm {
         throw 'Unimplemented exception';
     }
     getKeyIndices() {
+        throw 'Unimplemented exception';
+    }
+    getSortAlgorithmName() {
         throw 'Unimplemented exception';
     }
 };
@@ -62,5 +65,12 @@ class BubbleSortingAlgorithm extends SortingAlgorithm {
     getKeyIndices() {
         return [this.i, this.j];
     }
+
+    getSortAlgorithmName() {
+        return 'Bubble Sort';
+    }
+};
+
+class MergeSortingAlgorithm extends SortingAlgorithm {
 
 };

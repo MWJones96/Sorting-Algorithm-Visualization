@@ -12,6 +12,7 @@ function setup() {
     }
 
     sortingAlgorithm = new BubbleSortingAlgorithm(array);
+    document.getElementById('algorithm-name').innerHTML = sortingAlgorithm.getSortAlgorithmName();
 }
 
 function draw() {
