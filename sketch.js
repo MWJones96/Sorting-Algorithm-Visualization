@@ -11,7 +11,7 @@ function setup() {
         array[i] = Math.floor(Math.random() * (height + 1));
     }
 
-    sortingAlgorithm = new BubbleSortingAlgorithm(array);
+    sortingAlgorithm = new MergeSortingAlgorithm(array);
     document.getElementById('algorithm-name').innerHTML = sortingAlgorithm.getSortAlgorithmName();
 }
 

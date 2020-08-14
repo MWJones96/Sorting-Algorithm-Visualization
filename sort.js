@@ -72,5 +72,29 @@ class BubbleSortingAlgorithm extends SortingAlgorithm {
 };
 
 class MergeSortingAlgorithm extends SortingAlgorithm {
+    constructor(arr, start=-1, end=-1) {
+        super(arr, start, end);
 
+        let midIndex = start + ((end - start) / 2);
+        this.leftSide = new MergeSortingAlgorithm(arr, start, midIndex - 1);
+        this.rightSide = new MergeSortingAlgorithm(arr, midIndex, end);
+    }
+
+    sortStep() {
+    }
+
+    isDone() {
+        return this.end <= this.start;
+    }
+
+    getArray() {
+        return this.arr;
+    }
+
+    getKeyIndices() {
+    }
+
+    getSortAlgorithmName() {
+        return 'Merge Sort';
+    }
 };
