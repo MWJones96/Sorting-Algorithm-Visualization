@@ -1,12 +1,14 @@
 var sortingAlgorithm = null;
+var itemWidth = 10;
+var numItems = 64;
 
 function setup() {
-    let width = 512;
-    let height = 376;
+    let width = numItems * itemWidth;
+    var height = 500;
 
-    createCanvas(width, height);
+    createCanvas(width, 500);
 
-    let array = [...Array(width)];
+    let array = [...Array(numItems)];
     for(let i = 0; i < array.length; i++) {
         array[i] = Math.floor(Math.random() * (height + 1));
     }
@@ -27,9 +29,8 @@ function draw() {
 
 function drawArray(arr) {
     for (var i = 0; i < arr.length; i++) {
-        stroke(255);
-        strokeWeight(1);
-        line(i, height, i, height - arr[i]);
+        fill(255);
+        rect(i*itemWidth, height - arr[i], itemWidth, arr[i]);
     }
 }
 
@@ -38,8 +39,7 @@ function drawSpecialIndices(arr, indices) {
 
     for (var i = 0; i < key_indices.length; i++) {
         var indice = key_indices[i];
-        stroke(255, 0, 0);
-        strokeWeight(1);
-        line(indice, height, indice, height - arr[indice]);
+        fill(255, 0, 0);
+        rect(indice*itemWidth, height - arr[indice], itemWidth, arr[indice]);
     }
 }

@@ -1,5 +1,5 @@
 class SortingAlgorithm {
-    constructor(arr, delay=1, start=-1, end=-1) {
+    constructor(arr, delay=100, start=-1, end=-1) {
         this.arr = arr;
         this.delay = delay;
         this.start = (start == -1) ? 0 : start;
