@@ -78,13 +78,22 @@ class MergeSortingAlgorithm extends SortingAlgorithm {
         let midIndex = start + ((end - start) / 2);
         this.leftSide = new MergeSortingAlgorithm(arr, start, midIndex - 1);
         this.rightSide = new MergeSortingAlgorithm(arr, midIndex, end);
+
+        this.leftPtr = 0;
+        this.rightPtr = midIndex;
+        this.insertIndex = 0;
     }
 
     sortStep() {
+        if (!this.leftSide.isDone()) {
+            this.leftSide.sortStep();
+        } else if (!this.rightSide.isDone()) {
+            this.rightSide.sortStep();
+        }
     }
 
     isDone() {
-        return this.end <= this.start;
+        return false;
     }
 
     getArray() {
