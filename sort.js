@@ -1,5 +1,5 @@
 class SortingAlgorithm {
-    constructor(arr, delay=100, start=-1, end=-1) {
+    constructor(arr, delay=20, start=-1, end=-1) {
         this.arr = arr;
         this.delay = delay;
         this.start = (start == -1) ? 0 : start;
@@ -29,10 +29,10 @@ class BubbleSortingAlgorithm extends SortingAlgorithm {
     }
 
     async sort() {
-        for (this.i = this.start; this.i <= this.end; this.i++) {
+        for (this.i = this.start; this.i < this.end; this.i++) {
             let swapped = false;
 
-            for (this.j = this.start; this.j <= this.end; this.j++) {
+            for (this.j = this.start; this.j < this.end; this.j++) {
                 if (this.arr[this.j] > this.arr[this.j+1]) {
                     swap(this.arr, this.j, this.j + 1);
                     swapped = true;
@@ -52,7 +52,7 @@ class BubbleSortingAlgorithm extends SortingAlgorithm {
     }
 
     getKeyIndices() {
-        return [this.i, this.j];
+        return [this.i, this.j, this.j + 1];
     }
 
     getSortAlgorithmName() {
