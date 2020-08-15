@@ -71,14 +71,52 @@ class MergeSortingAlgorithm extends SortingAlgorithm {
     }
 
     async sort() {
+        if (this.end <= this.start) {
+            return;
+        }
+        
+        let midIndex = this.start + ((this.end - this.start) / 2);
 
+        let leftSide = new MergeSortingAlgorithm(this.arr, this.delay, this.start, midIndex - 1);
+        let rightSide = new MergeSortingAlgorithm(this.arr, this.delay, midIndex, this.end);
+
+        leftSide.sort();
+        rightSide.sort();
+
+        let left = leftSide.getArray();
+        let right = rightSide.getArray();
+
+        let leftPtr = leftSide.start;
+        let rightPtr = rightSide.start;
+
+        for (let i = this.start; i <= this.end; i++) {
+            if (leftPtr > leftSide.end && rightPtr > rightSide.end) {
+                break;
+            } else if (leftPtr > leftSide.end) {
+                this.arr[i] = right[rightPtr++];
+            } else if (rightPtr > rightSide.end) {
+                this.arr[i] = left[leftPtr++];
+            } else {
+                let leftVal = left[leftPtr];
+                let rightVal = right[rightPtr];
+
+                if (leftVal < rightVal) {
+                    this.arr[i] = left[leftPtr++];
+                } else {
+                    this.arr[i] = right[rightPtr++];
+                }
+            }
+
+            await sleep(this.delay);
+        }
     }
 
     getArray() {
-        return this.arr;
+        return this.arr.slice(this.start, this.end + 1);
     }
 
     getKeyIndices() {
+        return [];
     }
 
     getSortAlgorithmName() {

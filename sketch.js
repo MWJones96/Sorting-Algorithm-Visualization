@@ -17,7 +17,7 @@ function setup() {
     textSize(12);
     textAlign(CENTER, CENTER);
 
-    sortingAlgorithm = new BubbleSortingAlgorithm(array);
+    sortingAlgorithm = new MergeSortingAlgorithm(array);
     document.getElementById('algorithm-name').innerHTML = sortingAlgorithm.getSortAlgorithmName();
     sortingAlgorithm.sort();
 }
