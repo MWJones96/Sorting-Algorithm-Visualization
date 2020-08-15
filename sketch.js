@@ -28,6 +28,9 @@ function draw() {
     var array = sortingAlgorithm.getArray();
     var indices = sortingAlgorithm.getKeyIndices();
 
+    document.getElementById('swaps').innerHTML = sortingAlgorithm.swaps;
+    document.getElementById('comparisons').innerHTML = sortingAlgorithm.comparisons;
+
     drawArray(array);
     drawSpecialIndices(array, indices);
 }

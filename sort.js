@@ -4,6 +4,9 @@ class SortingAlgorithm {
         this.delay = delay;
         this.start = (start == -1) ? 0 : start;
         this.end = (end == -1) ? arr.length - 1 : end;
+
+        this.swaps = 0;
+        this.comparisons = 0;
     }
 
     async sort() {
@@ -33,7 +36,9 @@ class BubbleSortingAlgorithm extends SortingAlgorithm {
             let swapped = false;
 
             for (this.j = this.start; this.j < this.end; this.j++) {
+                this.comparisons++;
                 if (this.arr[this.j] > this.arr[this.j+1]) {
+                    this.swaps++;
                     swap(this.arr, this.j, this.j + 1);
                     swapped = true;
                 }
@@ -61,8 +66,8 @@ class BubbleSortingAlgorithm extends SortingAlgorithm {
 };
 
 class MergeSortingAlgorithm extends SortingAlgorithm {
-    constructor(arr, start=-1, end=-1) {
-        super(arr, start, end);
+    constructor(arr, delay=50, start=-1, end=-1) {
+        super(arr, delay, start, end);
     }
 
     async sort() {
